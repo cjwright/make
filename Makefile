@@ -8,23 +8,28 @@
 
 # Generate summary table
 #
-results.txt : isles.dat abyss.dat last.dat
-	python zipf_test.py last.dat abyss.dat isles.dat > results.txt
+# $@ Make variable meaning 'target of the current rule'
+# $^ Make variable meaning 'all the dependencies of the current rule'
+# bash wildcards allowed 
+
+results.txt : *.dat zipf_test.py
+	python zipf_test.py $< >  $@
 
 # Count words
 #
 .PHONY : dats
 dats : isles.dat abyss.dat last.dat
 
+# $< Make variable meaning 'the first dependency of the current rule'
 
 isles.dat : books/isles.txt
-	python wordcount.py books/isles.txt isles.dat
+	python wordcount.py $< $@
 
 abyss.dat : books/abyss.txt 
-	python wordcount.py books/abyss.txt abyss.dat 
+	python wordcount.py $< $@ 
 
 last.dat : books/last.txt 
-	python wordcount.py books/last.txt last.dat 
+	python wordcount.py $< $@ 
 
 
 # Added clean option
