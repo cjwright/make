@@ -5,7 +5,13 @@
 #	python wordcount.py books/isles.txt isles.dat   # ACTION
 #
 
-# Added .PHONY default
+
+# Generate summary table
+#
+results.txt : isles.dat abyss.dat last.dat
+	python zipf_test.py last.dat abyss.dat isles.dat > results.txt
+
+# Count words
 #
 .PHONY : dats
 dats : isles.dat abyss.dat last.dat
@@ -21,15 +27,10 @@ last.dat : books/last.txt
 	python wordcount.py books/last.txt last.dat 
 
 
-# Added .PHONY default
-#
-.PHONY : results
-results : dats
-	python zipf_test.py last.dat abyss.dat isles.dat > results.txt
-	
-
 # Added clean option
 #
 .PHONY : clean 
 clean : 
 	rm -f *.dat 
+	rm -f results.txt
+
