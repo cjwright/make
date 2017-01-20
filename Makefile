@@ -12,8 +12,8 @@
 # $^ Make variable meaning 'all the dependencies of the current rule'
 # bash wildcards allowed 
 
-results.txt : *.dat zipf_test.py
-	python zipf_test.py $< >  $@
+results.txt : *.dat
+	python zipf_test.py $^ >  $@
 
 # Count words
 #
