@@ -24,10 +24,13 @@ DAT_FILES=$(patsubst books/%.txt, %.dat, $(TXT_FILES))
 # $^ Make variable meaning 'all the dependencies of the current rule'
 # bash wildcards allowed 
 
+## results.txt : Generate Zipf summary table.
+#
 results.txt : $(DAT_FILES) $(ZIPF_SRC)
 	$(ZIPF_EXE) *.dat >  $@
 
-# Count words
+
+## dats        : Count words in text files.
 #
 .PHONY : dats
 dats : $(DAT_FILES)
@@ -39,16 +42,24 @@ dats : $(DAT_FILES)
 	$(COUNT_EXE) $< $*.dat
 
 
-.PHONY : variables
-variables:
-	@echo TXT_FILES: $(TXT_FILES)
-	@echo DAT_FILES: $(DAT_FILES)
-
-
-# Added clean option
+## clean       : Remove auto-generated files.
 #
 .PHONY : clean 
 clean : 
 	rm -f $(DAT_FILES)
 	rm -f results.txt
+
+
+## variables   : Print variables.
+#
+.PHONY : variables
+variables:
+        @echo TXT_FILES: $(TXT_FILES)
+        @echo DAT_FILES: $(DAT_FILES)
+
+
+.PHONY : help
+help : Makefile
+	@sed -n 's/^##//p' $<
+
 
