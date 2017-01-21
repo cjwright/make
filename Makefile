@@ -5,6 +5,9 @@
 #	python wordcount.py books/isles.txt isles.dat   # ACTION
 #
 
+# Include config file
+
+include config.mk
 
 # Generate summary table
 #
@@ -12,8 +15,8 @@
 # $^ Make variable meaning 'all the dependencies of the current rule'
 # bash wildcards allowed 
 
-results.txt : *.dat zipf_test.py dats
-	python zipf_test.py *.dat >  $@
+results.txt : *.dat $(ZIPF_SRC)
+	$(ZIPF_EXE) *.dat >  $@
 
 # Count words
 #
@@ -23,8 +26,8 @@ dats : isles.dat abyss.dat last.dat
 # $< Make variable meaning 'the first dependency of the current rule'
 # % is Make wildcard Can't be used in actions hence $*.dat below
 
-%.dat : books/%.txt wordcount.py
-	python wordcount.py $< $*.dat
+%.dat : books/%.txt $(COUNT_SRC)
+	$(COUNT_EXE) $< $*.dat
 
 
 # Added clean option
