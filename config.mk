@@ -13,3 +13,9 @@ COUNT_EXE=python $(COUNT_SRC)
 ZIPF_SRC=zipf_test.py
 
 ZIPF_EXE=python $(ZIPF_SRC)
+
+# Make png files
+#
+PNG_SRC=plotcount.py
+
+PNG_EXE=python $PNG_SRC 
