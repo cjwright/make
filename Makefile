@@ -12,8 +12,8 @@
 # $^ Make variable meaning 'all the dependencies of the current rule'
 # bash wildcards allowed 
 
-results.txt : *.dat
-	python zipf_test.py $^ >  $@
+results.txt : *.dat zipf_test.py dats
+	python zipf_test.py *.dat >  $@
 
 # Count words
 #
@@ -22,13 +22,13 @@ dats : isles.dat abyss.dat last.dat
 
 # $< Make variable meaning 'the first dependency of the current rule'
 
-isles.dat : books/isles.txt
+isles.dat : books/isles.txt wordcount.py
 	python wordcount.py $< $@
 
-abyss.dat : books/abyss.txt 
+abyss.dat : books/abyss.txt wordcount.py
 	python wordcount.py $< $@ 
 
-last.dat : books/last.txt 
+last.dat : books/last.txt wordcount.py
 	python wordcount.py $< $@ 
 
 
