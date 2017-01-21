@@ -21,15 +21,10 @@ results.txt : *.dat zipf_test.py dats
 dats : isles.dat abyss.dat last.dat
 
 # $< Make variable meaning 'the first dependency of the current rule'
+# % is Make wildcard Can't be used in actions hence $*.dat below
 
 %.dat : books/%.txt wordcount.py
 	python wordcount.py $< $*.dat
-
-#abyss.dat : books/abyss.txt wordcount.py
-#	python wordcount.py $< $@ 
-
-#last.dat : books/last.txt wordcount.py
-#	python wordcount.py $< $@ 
 
 
 # Added clean option
