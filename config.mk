@@ -18,4 +18,4 @@ ZIPF_EXE=python $(ZIPF_SRC)
 #
 PNG_SRC=plotcount.py
 
-PNG_EXE=python $PNG_SRC 
+PNG_EXE=python $(PNG_SRC) 
