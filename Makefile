@@ -18,11 +18,20 @@ TXT_FILES=$(wildcard books/*.txt)
 #
 DAT_FILES=$(patsubst books/%.txt, %.dat, $(TXT_FILES))
 
+
+
+PNG_FILES=$(patsubst books/%.txt, %.png, $(TXT_FILES))
+
+
 # Generate summary table
 #
 # $@ Make variable meaning 'target of the current rule'
 # $^ Make variable meaning 'all the dependencies of the current rule'
 # bash wildcards allowed 
+
+.PHONY : all 
+all : results.txt $(PNG_FILES)
+
 
 ## results.txt : Generate Zipf summary table.
 #
@@ -42,6 +51,16 @@ dats : $(DAT_FILES)
 	$(COUNT_EXE) $< $*.dat
 
 
+
+.PHONY :pngs
+pngs : $(PNG_FILES)
+
+%.png : %.dat $(PNG_SRC)
+	$(PNG_EXE) $*.dat  $*.png
+
+
+
+
 ## clean       : Remove auto-generated files.
 #
 .PHONY : clean 
@@ -57,10 +76,14 @@ clean :
 variables:
         @echo TXT_FILES: $(TXT_FILES)
         @echo DAT_FILES: $(DAT_FILES)
-
+	@echo PNGS: $(PNGS)
+	@echo PNG_FILES: $(PNG_FILES)
 
 .PHONY : help
 help : Makefile
 	@sed -n 's/^##//p' $<
+
+
+
 
 
