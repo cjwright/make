@@ -22,14 +22,14 @@ dats : isles.dat abyss.dat last.dat
 
 # $< Make variable meaning 'the first dependency of the current rule'
 
-isles.dat : books/isles.txt wordcount.py
-	python wordcount.py $< $@
+%.dat : books/%.txt wordcount.py
+	python wordcount.py $< $*.dat
 
-abyss.dat : books/abyss.txt wordcount.py
-	python wordcount.py $< $@ 
+#abyss.dat : books/abyss.txt wordcount.py
+#	python wordcount.py $< $@ 
 
-last.dat : books/last.txt wordcount.py
-	python wordcount.py $< $@ 
+#last.dat : books/last.txt wordcount.py
+#	python wordcount.py $< $@ 
 
 
 # Added clean option
