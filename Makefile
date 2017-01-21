@@ -48,6 +48,7 @@ dats : $(DAT_FILES)
 clean : 
 	rm -f $(DAT_FILES)
 	rm -f results.txt
+	rm -f *.png
 
 
 ## variables   : Print variables.
